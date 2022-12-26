@@ -1,4 +1,4 @@
-import "./rowPoster.scss";
+import "./rowPlaylist.scss";
 import { BASE_IMG_URL, FALLBACK_IMG_URL } from "../../requests";
 import { useDispatch } from "react-redux";
 import { addToFavourites, removeFromFavourites } from "../../redux/favourites/favourites.actions";
@@ -34,7 +34,7 @@ const RowPoster = result => {
 
 	return (
 		<div
-			className={`Row__poster ${isLarge && "Row__poster--big"}`}
+			className={`Row__playlist`}
 			onClick={handlePlayAction}
 		>
 			{isLarge ? (
@@ -51,7 +51,7 @@ const RowPoster = result => {
 					</div>
 				</>
 			)}
-			<div className="Row__poster-info">
+			<div className="Row__playlist-info">
 				{/* <div className="Row__poster-info--iconswrp">
 					<Link
 						className="Row__poster-info--icon icon--play"

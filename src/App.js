@@ -15,6 +15,7 @@ import DetailModal from "./components/DetailModal/DetailModal";
 import SplashAnimation from "./components/SplashAnimation/SplashAnimation";
 import PlayAnimation from "./components/PlayAnimation/PlayAnimation";
 import { selectSearchResults } from "./redux/search/search.selectors";
+import Detail from "./pages/Detail/Detail";
 
 const App = () => {
     const currentUser  = {}
@@ -36,6 +37,10 @@ const App = () => {
                     <Route
                         path="/"
                         element={<Homepage/>}
+                    />
+                    <Route
+                        path="/movie/:id"
+                        element={<Detail/>}
                     />
                     {/* <Route
                         path="/splash"

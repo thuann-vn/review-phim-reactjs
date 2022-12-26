@@ -165,8 +165,8 @@
         }
     }
 
-    .swiper-container {
-        overflow: initial;
+    .swiper {
+        overflow: initial !important;
         width: 100%;
         height: auto;
         padding: 0 4%;

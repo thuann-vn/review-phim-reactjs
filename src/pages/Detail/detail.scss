@@ -1,0 +1,72 @@
+.Detail {
+  overflow: hidden;
+  flex: 1;
+  padding-top: 60px;
+}
+
+.player{
+  height: 600px;
+
+  >div{
+    position: relative;
+  }
+}
+
+.movie-detail{
+  padding: 20px;
+  width: 90%;
+  max-width: 1300px;
+  margin: 0 auto;
+
+  .description{
+    margin-top: 20px;
+    text-align: justify;
+  }
+
+  display: flex;
+  flex-direction: row;
+
+  .movie-detail-left{
+    flex: 8;
+    padding-right: 10px;
+  }
+
+  .movie-detail-right{
+    width: 200px;
+    padding-left: 20px;
+  }
+}
+
+.eps-list{
+  margin-top: 30px;
+  max-width: 400px;
+  .epsButton{
+    display: flex;
+    background-color: black;
+    border-radius: 8px;
+    padding: 7px 10px;
+    margin-top: 5px;
+    flex-direction: row;
+    align-content: center;
+    align-items:  center;
+
+    &.active{
+      background-color: #fff;
+    }
+  }
+  .epsPlayIcon {
+    width: 32px;
+    height: 32px;
+    margin-right: 10px
+  }
+
+  .epsPlayIconActive{
+    width: 32px;
+    height: 32px;
+    margin-right: 10px
+  }
+
+  .epsLabelActive{
+    color: #000;
+  }
+}

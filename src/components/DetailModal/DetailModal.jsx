@@ -19,7 +19,7 @@ const DetailModal = () => {
 	const modalClosed = useSelector(selectModalState);
 	const modalContent = useSelector(selectModalContent);
 	const handleModalClose = () => dispatch(hideModalDetail());
-	const { overview, fallbackTitle, backdrop_path, release_date, first_air_date, vote_average, original_language, adult, genresConverted, isFavourite } = modalContent;
+	const { overview, fallbackTitle, image, release_date, first_air_date, vote_average, original_language, adult, genresConverted, isFavourite } = modalContent;
 	const joinedGenres = genresConverted ? genresConverted.join(', ') : "Not available";
 	const maturityRating = adult === undefined ? "Not available" : adult ? "Suitable for adults only" : "Suitable for all ages";
 	const reducedDate = release_date ? dateToYearOnly(release_date) : first_air_date ? dateToYearOnly(first_air_date) : "Not Available";
@@ -70,7 +70,7 @@ const DetailModal = () => {
 								<div className="Modal__image--shadow" />
 								<img
 									className="Modal__image--img"
-									src={backdrop_path ? `${BASE_IMG_URL}/${backdrop_path}` : FALLBACK_IMG_URL}
+									src={image ? `${BASE_IMG_URL}/${image}` : FALLBACK_IMG_URL}
 									alt={fallbackTitle}
 								/>
 								<div className="Modal__image--buttonswrp">
@@ -108,18 +108,6 @@ const DetailModal = () => {
 										{release_date ? "Release date: " : "First air date: "}
 									</span>
 									<span className="Modal__info--row-description">{reducedDate}</span>
-								</motion.div>
-								<motion.div variants={modalFadeInUpVariants} className="Modal__info--row">
-									<span className='Modal__info--row-label'>Average vote: </span>
-									<span className="Modal__info--row-description">{vote_average || "Not available"}</span>
-								</motion.div>
-								<motion.div variants={modalFadeInUpVariants} className="Modal__info--row">
-									<span className='Modal__info--row-label'>Original language: </span>
-									<span className="Modal__info--row-description">{capitalizeFirstLetter(original_language)}</span>
-								</motion.div>
-								<motion.div variants={modalFadeInUpVariants} className="Modal__info--row">
-									<span className='Modal__info--row-label'>Age classification: </span>
-									<span className="Modal__info--row-description">{maturityRating}</span>
 								</motion.div>
 							</motion.div>
 						</motion.div>

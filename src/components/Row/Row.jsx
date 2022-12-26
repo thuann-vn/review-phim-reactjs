@@ -3,7 +3,7 @@ import RowPoster from "../RowPoster/RowPoster";
 import SkeletonElement from "../SkeletonElement/SkeletonElement";
 import SkeletonPoster from "../SkeletonPoster/SkeletonPoster";
 import { useSelector } from "react-redux";
-import { useRef } from "react";
+import { useEffect, useRef, useState } from "react";
 import { Link, useLocation } from "react-router-dom";
 import useViewport from "../../hooks/useViewport";
 import { MdChevronLeft, MdChevronRight } from 'react-icons/md';
@@ -12,16 +12,21 @@ import { FiChevronRight } from "react-icons/fi";
 // Swiper
 import SwiperCore, { Navigation, Pagination } from 'swiper';
 import { Swiper, SwiperSlide } from "swiper/react";
-import 'swiper/css';
+import 'swiper/scss';
+import 'swiper/scss/navigation';
+import 'swiper/scss/pagination';
+import { getFilms } from "../../api/fimApi";
 // import "swiper/swiper.scss";
 // import 'swiper/components/navigation/navigation.scss';
 // import 'swiper/components/pagination/pagination.scss';
 SwiperCore.use([Navigation, Pagination]);
 
-const Row = ({ selector, title, genre, isLarge }) => {
+const Row = ({ id, name, genre, isLarge }) => {
 	const { width } = useViewport();
-	const rowData = useSelector(selector);
-	const { loading, error, data: results } = rowData;
+	const [loading, setLoading] = useState(true)
+	const [data, setData] = useState([])
+	const [results, setResults] = useState([])
+	const [error, setError] = useState(null)
 	const { pathname } = useLocation();
 
 	//Custom Swiper config
@@ -51,6 +56,25 @@ const Row = ({ selector, title, genre, isLarge }) => {
 		slideToClickedSlide: false,
 		allowTouchMove: true
     };
+
+	useEffect(() => {
+		_loadMovies()
+	}, [])
+	
+
+	const _loadMovies = async () => {
+		var params = {}
+		if (id) {
+		  params.genre_id = id
+		}
+		params.offset = 0
+		params.limit = 20
+		console.log(params)
+		const result = await getFilms(params)
+		console.log(result.data)
+		setData(result.data.data)
+		setLoading(false)
+	  }
 
 	const rightMouseOver = (e) => {
 		if (e.currentTarget.classList.contains('right')) {e.currentTarget.parentElement.classList.add('is-right')}
@@ -91,7 +115,7 @@ const Row = ({ selector, title, genre, isLarge }) => {
 				) : (
 					<h3 className="Row__title">
 						<Link to={`${pathname}/${genre}`}>
-							<span>{title}</span>
+							<span>{name}</span>
 							<span className='Row__showmore'>Show all <FiChevronRight/></span>
 						</Link>
 					</h3>
@@ -106,6 +130,7 @@ const Row = ({ selector, title, genre, isLarge }) => {
 						<MdChevronRight className="Row__slider--mask-icon right" size="3em" style={{ color:'white' }} />
 					</div>
 					<Swiper
+						slidesPerView={6}
 						{...customSwiperParams}
 						onBeforeInit={(swiper) => {
 							swiper.params.navigation.prevEl = navigationPrevRef.current;
@@ -113,8 +138,8 @@ const Row = ({ selector, title, genre, isLarge }) => {
 						}}
 					>
 						{!loading &&
-							results &&
-							results.map((result, i) => (
+							data &&
+							data.map((result, i) => (
 								<SwiperSlide
 									key={result.id}
 									className={insertPositionClassName(i)}

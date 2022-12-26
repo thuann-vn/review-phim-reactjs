@@ -19,6 +19,9 @@ export const useRetrieveData = (type) => {
             case "popular":
                 selectedConfigArray = fetchPopularDataConfig;
                 break;
+            case "home":
+                selectedConfigArray = fetchPopularDataConfig;
+                break;
             default:
                 break;
         }

@@ -8228,6 +8228,11 @@ react-is@^18.0.0:
   resolved "https://registry.yarnpkg.com/react-is/-/react-is-18.2.0.tgz#199431eeaaa2e09f86427efbb4f1473edb47609b"
   integrity sha512-xWGDIW6x921xtzPkhiULtthJHoJvBbF3q26fzloPCK0hsvxtPVelvftw3zjbHWSkR2km9Z+4uxbDDK/6Zw9B8w==
 
+react-netflix-player@^1.2.0:
+  version "1.2.0"
+  resolved "https://registry.yarnpkg.com/react-netflix-player/-/react-netflix-player-1.2.0.tgz#d1b4eea77db45786eb8c3b9b7e39690855f925b9"
+  integrity sha512-zosEtzqgSBciMI/qkMQgUp6MwHHCQH7iAnKC3IzwaKw21DbdEiAh1Rpr64bTnMcIdf5FiCLZPwRwpaHEY3aQUQ==
+
 react-redux@^8.0.5:
   version "8.0.5"
   resolved "https://registry.yarnpkg.com/react-redux/-/react-redux-8.0.5.tgz#e5fb8331993a019b8aaf2e167a93d10af469c7bd"

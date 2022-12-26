@@ -92,6 +92,8 @@
   &__image {
     &--wrp {
       position: relative;
+      max-height: 400px;
+      overflow: hidden;
     }
     &--img {
       width: 100%;

@@ -1,13 +1,11 @@
 import { genresList } from "../dataConfig";
 
-const useGenreConversion = genreIds => {
+const useGenreConversion = genres => {
 	const genresConvertedList = [];
-	genreIds
+	genres
 		.slice(0, 3)
-		.map(genreId =>
-			genresList
-				.filter(el => el.id === genreId)
-				.map(el => genresConvertedList.push(el.name))
+		.map(genre =>
+			genre.name
 		);
 
 	return genresConvertedList;
