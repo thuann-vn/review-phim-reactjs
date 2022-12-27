@@ -15,6 +15,7 @@ const Detail = () => {
     const { id } = useParams();
     const [detail, setDetail] = useState({})
     const [url, setUrl] = useState(null)
+    const [epsIndex, setEpsIndex] = useState(0)
     const navigation = useNavigate()
     useEffect(() => {
         _loadData()
@@ -29,6 +30,15 @@ const Detail = () => {
         }
     }
 
+    const nextMovie = () => {
+      if(detail.episodes && epsIndex < detail.episodes.length){
+        setEpsIndex(epsIndex + 1)
+        setUrl(detail.episodes[epsIndex + 1].link)
+      }else{
+        navigation('/movie/' + detail.relatedFilms[0].id)
+      }
+    }
+
     return (
         <motion.div
             className="Detail"
@@ -37,14 +47,14 @@ const Detail = () => {
             animate="animate"
             exit="exit"
         >
-			<div className="player">
+			    <div className="player">
                 <ReactNetflixPlayer 
                     src={url}
                     onNextClick={() => {
-                        navigation('/movie/' + detail.relatedFilms[0].id)
+                      nextMovie()
                     }}
                     onEnded={()=>{
-                        navigation('/movie/' + detail.relatedFilms[0].id)
+                      nextMovie()
                     }}
                     autoPlay={true} 
                     primaryColor="red" 
@@ -57,7 +67,7 @@ const Detail = () => {
             <div className="movie-detail">
                 <div className="movie-detail-left">
                     <h1>{detail.name}</h1>
-                    <h2>{detail.english_name}</h2>
+                    <h2 className="movie-alt-name">{detail.english_name}</h2>
                     <p className="movie-genres">{detail.year}{' '}
                         {detail.genres
                         ? ' | ' + detail.genres.map(item => item.name).join(' • ')
@@ -67,11 +77,14 @@ const Detail = () => {
                     <div className="eps-list">
                     <h3>Danh sách các tập</h3>
                     {detail.episodes &&
-                      detail.episodes.map(episode => {
+                      detail.episodes.map((episode, index) => {
                         return (
                           <a
                             className={`epsButton ${episode.link == url ? 'active' : ''}`}
-                            onClick={() => setUrl(episode.link)}
+                            onClick={() => {
+                              setUrl(episode.link)
+                              setEpsIndex(index)
+                            }}
                             key={episode.link}
                             disabled={episode.link == url}>
                             {episode.link == url ? (
@@ -80,6 +93,7 @@ const Detail = () => {
                                 src={'/playing.gif'}
                                 resizeMode="contain"
                                 key={'playing'}
+                                alt="{episode.name}"
                               />
                             ) : (
                               <img
@@ -87,6 +101,7 @@ const Detail = () => {
                                 src={'/play.png'}
                                 resizeMode="contain"
                                 key={'play'}
+                                alt="{episode.name}"
                               />
                             )}
 
@@ -102,7 +117,7 @@ const Detail = () => {
                     </div>
                 </div>
                 <div className="movie-detail-right">
-                    <h1>Tiếp theo</h1>
+                    <h1 className="next-movies">Tiếp theo</h1>
                     {
                         (detail.relatedFilms || []).map(item => {
                             return <RowPlaylist

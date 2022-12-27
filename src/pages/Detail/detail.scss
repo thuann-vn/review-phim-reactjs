@@ -18,6 +18,15 @@
   max-width: 1300px;
   margin: 0 auto;
 
+  .movie-genres{
+    font-size: 14px;
+  }
+
+  .movie-alt-name{
+    font-size: 14px;
+    margin-bottom: 5px;
+  }
+
   .description{
     margin-top: 20px;
     text-align: justify;
@@ -35,6 +44,11 @@
     width: 200px;
     padding-left: 20px;
   }
+
+  .next-movies{
+    font-size: 16px;
+    margin-bottom: 10px;
+  }
 }
 
 .eps-list{
@@ -49,6 +63,7 @@
     flex-direction: row;
     align-content: center;
     align-items:  center;
+    cursor: pointer;
 
     &.active{
       background-color: #fff;
@@ -61,8 +76,12 @@
   }
 
   .epsPlayIconActive{
-    width: 32px;
-    height: 32px;
+    width: 42px;
+    height: 42px;
+    margin-top: -5px;
+    margin-bottom: -5px;
+    margin-left: -5px;
+    margin-right: 5px;
     margin-right: 10px
   }
 

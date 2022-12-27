@@ -59,7 +59,7 @@ const Searchbar = () => {
                 className="Searchbar--toggler"
                 onClick={handleSearchInputToggle}
             >
-                <FiSearch size="1.5em" />
+                <FiSearch size="1.5em" /> Tìm kiếm
             </div>
             <div
                 className={`Searchbar--clear ${searchInputToggle && searchInput.length && "typing"}`}

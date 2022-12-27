@@ -38,33 +38,23 @@ const Navbar = () => {
 				exit="hidden"
 			>
 				<Link to="/">
-					<img className="Navbar__logo" src={width >= 600 ? LOGO_URL : MOBILE_LOGO_URL} alt="" />
+					<img className="Navbar__logo" src='/icon.png' alt="" />
 				</Link>
 				{width >= 1024 ? (
 					<ul className="Navbar__primarynav Navbar__navlinks">
 						<li className="Navbar__navlinks--link">
-							<NavLink to="/browse" activeClassName="activeNavLink">
-								Home
+							<NavLink to="/" activeClassName="activeNavLink">
+								Trang chủ
 							</NavLink>
 						</li>
 						<li className="Navbar__navlinks--link">
-							<NavLink to="/tvseries" activeClassName="activeNavLink">
-								TV Series
+							<NavLink to="/phim/phim-bộ" activeClassName="activeNavLink">
+								Phim bộ
 							</NavLink>
 						</li>
 						<li className="Navbar__navlinks--link">
-							<NavLink to="/movies" activeClassName="activeNavLink">
-								Movies
-							</NavLink>
-						</li>
-						<li className="Navbar__navlinks--link">
-							<NavLink to="/popular" activeClassName="activeNavLink">
-								New & Popular
-							</NavLink>
-						</li>
-						<li className="Navbar__navlinks--link">
-							<NavLink to="/mylist" activeClassName="activeNavLink">
-								My list
+							<NavLink to="/phim/phim-lẻ" activeClassName="activeNavLink">
+								Phim lẻ
 							</NavLink>
 						</li>
 					</ul>
@@ -73,7 +63,7 @@ const Navbar = () => {
 						className={`Navbar__primarynav Navbar__navlinks ${isScrolled && "Navbar__primarynav--scrolled"}`}
 						onClick={() => setGenresNav(!genresNav)}
 					>
-						<span className="Navbar__navlinks--link">Discover</span>
+						<span className="Navbar__navlinks--link">Menu</span>
 						<FaCaretDown className="Navbar__primarynav--toggler Navbar__primarynav--caret" />
 						<div
 							className={`Navbar__primarynav--content ${genresNav ? "active" : ""}`}
@@ -84,28 +74,18 @@ const Navbar = () => {
 									ref={genresNavRef}
 								>
 									<li className="Navbar__navlinks--link">
-										<NavLink to="/browse" activeClassName="activeNavLink">
-											Home
+										<NavLink to="/" activeClassName="activeNavLink">
+										Trang chủ
 										</NavLink>
 									</li>
 									<li className="Navbar__navlinks--link">
-										<NavLink to="/tvseries" activeClassName="activeNavLink">
-											TV Series
+										<NavLink to="/phim/phim-bộ" activeClassName="activeNavLink">
+										Phim bộ
 										</NavLink>
 									</li>
 									<li className="Navbar__navlinks--link">
-										<NavLink to="/movies" activeClassName="activeNavLink">
-											Movies
-										</NavLink>
-									</li>
-									<li className="Navbar__navlinks--link">
-										<NavLink to="/popular" activeClassName="activeNavLink">
-											New & Popular
-										</NavLink>
-									</li>
-									<li className="Navbar__navlinks--link">
-										<NavLink to="/mylist" activeClassName="activeNavLink">
-											My list
+										<NavLink to="/phim/phim-lẻ" activeClassName="activeNavLink">
+										Phim lẻ
 										</NavLink>
 									</li>
 								</ul>
@@ -117,7 +97,7 @@ const Navbar = () => {
 					<div className="Navbar__navitem">
 						<Searchbar />
 					</div>
-					<div className="Navbar__navitem">
+					{/* <div className="Navbar__navitem">
 						<div
 							className={`Navbar__navprofile ${profileNav && "active"}`}
 							onClick={() => setProfileNav(!profileNav)}
@@ -146,7 +126,7 @@ const Navbar = () => {
 								)}
 							</div>
 						</div>
-					</div>
+					</div> */}
 				</div>
 			</motion.nav>
 		</>

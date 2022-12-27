@@ -40,7 +40,6 @@ const Homepage = () => {
             {genres && genres.filter(item => item.featured).map(props => (
                 <Row key={props.id} {...props} />
             ))}
-            <Credits />
         </motion.div>
     )
 }

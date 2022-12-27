@@ -1,5 +1,5 @@
 import "./banner.scss";
-import React from "react";
+import React, { useEffect, useState } from "react";
 import { motion } from "framer-motion";
 import { staggerOne, bannerFadeInLoadSectionVariants, bannerFadeInVariants, bannerFadeInUpVariants } from "../../motionUtils";
 import { BASE_IMG_URL } from "../../requests";
@@ -12,34 +12,23 @@ import { useDispatch, useSelector } from "react-redux";
 import { showModalDetail } from "../../redux/modal/modal.actions";
 import { selectTrendingMovies, selectNetflixMovies } from "../../redux/movies/movies.selectors";
 import { selectNetflixSeries } from "../../redux/series/series.selectors";
+import { getFilms } from "../../api/fimApi";
 
 const Banner = ({ type }) => {
-	let selector;
-	switch (type) {
-		case "movies":
-			selector = selectTrendingMovies;
-			break;
-		case "series":
-			selector = selectNetflixSeries;
-			break;
-		default:
-			selector = selectNetflixMovies;
-			break;
-	}
-
-	const myData = useSelector(selector);
-	const { loading, error, data: results } = myData;
-	const finalData = results[randomize(results)];
-	const fallbackTitle = finalData?.title || finalData?.name || finalData?.original_name;
-	const description = truncate(finalData?.overview, 150);
+	const [genres, setGenres] = useState([])
+	const [loading, setLoading] = useState(true)
+	const [homeFilms, setHomeFilms] = useState([])
 	const dispatch = useDispatch();
+	
+	useEffect(() => {
+		loadHomeFilms()
+	  }, [])
 
-	const handlePlayAnimation = event => {
-		event.stopPropagation();
-	};
-
-	const handleModalOpening = () => {
-		dispatch(showModalDetail({ ...finalData, fallbackTitle }));
+	  
+	const loadHomeFilms = async () => {
+		const result = await getFilms({ featured: true, withGenres: true })
+		setHomeFilms(result.data.data)
+		setLoading(false)
 	}
 
 	return (
@@ -52,17 +41,16 @@ const Banner = ({ type }) => {
 				className="Banner__loadsection"
 			>
 				{loading && <SkeletonBanner />}
-				{error && <div className="errored">Oops, an error occurred.</div>}
 			</motion.section>
 
-			{!loading && finalData && (
+			{!loading && (
 				<motion.header
 					variants={bannerFadeInVariants}
 					initial='initial'
 					animate='animate'
 					exit='exit'
 					className="Banner"
-					style={{backgroundImage: `url(${BASE_IMG_URL}/${finalData?.backdrop_path})`}}
+					style={{backgroundImage: `url(${BASE_IMG_URL}/${homeFilms[0]?.image})`}}
 				>
 					<motion.div
 						className="Banner__content"
@@ -71,25 +59,17 @@ const Banner = ({ type }) => {
 						animate='animate'
 						exit='exit'
 					>
-						<motion.h1 variants={bannerFadeInUpVariants} className="Banner__content--title">{fallbackTitle}</motion.h1>
+						<motion.h1 variants={bannerFadeInUpVariants} className="Banner__content--title">{homeFilms[0].name}</motion.h1>
 						<motion.div variants={bannerFadeInUpVariants} className="Banner__buttons">
 							<Link
 								className="Banner__button"
-								onClick={handlePlayAnimation}
+								onClick={()=> {}}
 								to={"/play"}
 							>
 								<FaPlay />
-								<span>Play</span>
+								<span>Xem ngay</span>
 							</Link>
-							<button
-								className="Banner__button"
-								onClick={handleModalOpening}
-							>
-								<BiInfoCircle size="1.5em" />
-								<span>More info</span>
-							</button>
 						</motion.div>
-						<motion.p variants={bannerFadeInUpVariants} className="Banner__content--description">{description}</motion.p>
 					</motion.div>
 					<div className="Banner__panel" />
 					<div className="Banner__bottom-shadow" />

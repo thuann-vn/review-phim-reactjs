@@ -42,67 +42,19 @@ const App = () => {
                         path="/movie/:id"
                         element={<Detail/>}
                     />
-                    {/* <Route
-                        path="/splash"
-                        element={<SplashAnimation/>}
-                    /> */}
-                    {/* <Route
-                        path="/play"
-                        element={<PlayAnimation/>}
-                    /> */}
                     <Route
-                        path="/search"
+                        path="/tim-kiem"
                         element={<Search results={searchResults}/>}
                     />
                     <Route
                         exact
-                        path="/browse"
+                        path="/"
                         element={<Homepage/>}
                     />
                     <Route
                         exact
-                        path="/browse/:categoryName"
-                        element={<Category/>}
-                    />
-                    <Route
-                        exact
-                        path="/tvseries"
-                        element={<TVSeries/>}
-                    />
-                    <Route
-                        exact
-                        path="/tvseries/:categoryName"
-                        element={<Category/>}
-                    />
-                    <Route
-                        exact
-                        path="/movies"
+                        path="/phim/:categoryName"
                         element={<Movies/>}
-                    />
-                    <Route
-                        exact
-                        path="/movies/:categoryName"
-                       element={<Category/>}
-                    />
-                    <Route
-                        exact
-                        path="/popular"
-                        element={<Popular/>}
-                    />
-                    <Route
-                        exact
-                        path="/popular/:categoryName"
-                        element={<Category/>}
-                    />
-                    <Route
-                        exact
-                        path="/mylist"
-                        element={<MyList/>}
-                    />
-                    <Route
-                        exact
-                        path="/login"
-                        element={<Auth/>}
                     />
                 </Routes>
             </AnimatePresence>
