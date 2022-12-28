@@ -31,7 +31,7 @@ const Searchbar = () => {
     const clearSearchInputToggle = () => {
         setSearchInput("");
         dispatch(clearSearchInputValue());
-        history.push("/browse");
+        history("/");
     };
 
     const handleSearchInput = event => {
@@ -40,19 +40,19 @@ const Searchbar = () => {
         dispatch(changeSearchInputValue(value));
 
         if (value.length > 0) {
-            history.push(`/search?q=${value}`);
-            dispatch(fetchSearchResultsAsync(value));
-        } else history.push("/browse");
+            history(`/tim-kiem?q=${value}`);
+        } else history("/");
     };
 
     return (
-        <div className="Searchbar" ref={searchbarRef}>
+        <form className="Searchbar" ref={searchbarRef}>
             <input
                 type="text"
-                placeholder="Search titles, people"
+                placeholder="Tìm kiếm theo tên phim..."
                 value={searchInput}
                 onChange={handleSearchInput}
                 ref={searchInputRef}
+                name="q"
                 className={`Searchbar--search ${searchInputToggle && "Searchbar--active"}`}
             />
             <div
@@ -67,7 +67,7 @@ const Searchbar = () => {
             >
                 <RiCloseFill />
             </div>
-        </div>
+        </form>
     )
 }
 

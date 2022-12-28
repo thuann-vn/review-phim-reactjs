@@ -9,9 +9,7 @@ import { Link, useNavigate } from "react-router-dom";
 
 const RowPoster = result => {
 	const { item, item: { id, title, original_name, original_title, name, genres, poster_path, backdrop_path, image }, isLarge, isFavourite } = result;
-	console.log(result)
 	let fallbackTitle = title || original_title || name || original_name;
-	console.log(fallbackTitle)
 	const genresConverted = useGenreConversion(genres);
 	const dispatch = useDispatch();
 	const navigation = useNavigate()
