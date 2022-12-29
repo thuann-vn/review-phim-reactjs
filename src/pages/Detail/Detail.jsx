@@ -8,7 +8,7 @@ import { defaultPageFadeInVariants } from "../../motionUtils";
 import {ReactNetflixPlayer} from "react-netflix-player"
 import { useNavigate, useParams } from "react-router-dom";
 import { useEffect, useState } from "react";
-import { getFilmDetail } from "../../api/fimApi";
+import { getFilmDetail, getFilmDetailBySLug } from "../../api/fimApi";
 import RowPlaylist from "../../components/RowPlaylist/RowPlaylist";
 
 const Detail = () => {
@@ -22,7 +22,7 @@ const Detail = () => {
     }, [id])
     
     const _loadData = async () => {
-        const result = await getFilmDetail(id)
+        const result = await getFilmDetailBySLug(id)
         const data = result.data.data
         setDetail(data)
         if (data.episodes && data.episodes.length) {
@@ -35,7 +35,7 @@ const Detail = () => {
         setEpsIndex(epsIndex + 1)
         setUrl(detail.episodes[epsIndex + 1].link)
       }else{
-        navigation('/movie/' + detail.relatedFilms[0].id)
+        navigation('/movie/' + detail.relatedFilms[0].slug)
       }
     }
 

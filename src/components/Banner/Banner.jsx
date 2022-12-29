@@ -64,7 +64,7 @@ const Banner = ({ type }) => {
 							<Link
 								className="Banner__button"
 								onClick={()=> {}}
-								to={"/play"}
+								to={"/movie/" + homeFilms[0].slug}
 							>
 								<FaPlay />
 								<span>Xem ngay</span>

@@ -8,7 +8,7 @@ import { showModalDetail } from "../../redux/modal/modal.actions";
 import { Link, useNavigate } from "react-router-dom";
 
 const RowPoster = result => {
-	const { item, item: { id, title, original_name, original_title, name, genres, poster_path, backdrop_path, image }, isLarge, isFavourite } = result;
+	const { item, item: { id, slug, title, original_name, original_title, name, genres, poster_path, backdrop_path, image }, isLarge, isFavourite } = result;
 	console.log(result)
 	let fallbackTitle = title || original_title || name || original_name;
 	console.log(fallbackTitle)
@@ -29,7 +29,7 @@ const RowPoster = result => {
 	}
 	const handlePlayAction = event => {
 		event.stopPropagation();
-		navigation('/movie/' + id)
+		navigation('/movie/' + slug)
 	};
 
 	return (

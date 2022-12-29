@@ -30,8 +30,16 @@ export const getFilmDetail = async (id, lang) => {
     return Promise.reject(e)
   }
 }
+export const getFilmDetailBySLug = async (slug, lang) => {
+  try {
+    return await axiosService.get(`films/${slug}?slug=${slug}&lang=${lang}`)
+  } catch (e) {
+    return Promise.reject(e)
+  }
+}
 export default {
   getGenres,
   getFilms,
-  getFilmDetail
+  getFilmDetail,
+  getFilmDetailBySLug
 };
