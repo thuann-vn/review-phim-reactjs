@@ -12,12 +12,13 @@ import { useDispatch, useSelector } from "react-redux";
 import { showModalDetail } from "../../redux/modal/modal.actions";
 import { selectTrendingMovies, selectNetflixMovies } from "../../redux/movies/movies.selectors";
 import { selectNetflixSeries } from "../../redux/series/series.selectors";
-import { getFilms } from "../../api/fimApi";
+import { getFilmDetail, getFilms } from "../../api/fimApi";
 
 const Banner = ({ type }) => {
 	const [genres, setGenres] = useState([])
 	const [loading, setLoading] = useState(true)
 	const [homeFilms, setHomeFilms] = useState([])
+	const [description, setDescription] = useState('')
 	const dispatch = useDispatch();
 	
 	useEffect(() => {
@@ -28,7 +29,13 @@ const Banner = ({ type }) => {
 	const loadHomeFilms = async () => {
 		const result = await getFilms({ featured: true, withGenres: true })
 		setHomeFilms(result.data.data)
+		await loadDescription(result.data.data[0])
 		setLoading(false)
+	}
+
+	const loadDescription = async (movie) => {
+		const result = await getFilmDetail(movie.id);
+		setDescription(result.data.data.description)
 	}
 
 	return (
@@ -70,6 +77,11 @@ const Banner = ({ type }) => {
 								<span>Xem ngay</span>
 							</Link>
 						</motion.div>
+						
+						
+						<motion.p variants={bannerFadeInUpVariants} className="Banner__content--description">
+							<span dangerouslySetInnerHTML={{ __html: description.substring(0, 250) }} />...
+						</motion.p>
 					</motion.div>
 					<div className="Banner__panel" />
 					<div className="Banner__bottom-shadow" />
