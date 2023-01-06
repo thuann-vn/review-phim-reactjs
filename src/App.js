@@ -26,6 +26,11 @@ const App = () => {
     const dispatch = useDispatch();
     const location = useLocation();
 
+
+    useEffect(() => {
+        ReactGA.pageview(window.location.pathname + window.location.search);
+      }, []);
+      
     useEffect(() => {
     }, [dispatch])
 
