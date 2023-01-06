@@ -16,6 +16,9 @@ import SplashAnimation from "./components/SplashAnimation/SplashAnimation";
 import PlayAnimation from "./components/PlayAnimation/PlayAnimation";
 import { selectSearchResults } from "./redux/search/search.selectors";
 import Detail from "./pages/Detail/Detail";
+import ReactGA from 'react-ga';
+const TRACKING_ID = "UA-251747573-2"; // OUR_TRACKING_ID
+ReactGA.initialize(TRACKING_ID);
 
 const App = () => {
     const currentUser  = {}
