@@ -17,8 +17,13 @@ import PlayAnimation from "./components/PlayAnimation/PlayAnimation";
 import { selectSearchResults } from "./redux/search/search.selectors";
 import Detail from "./pages/Detail/Detail";
 import ReactGA from 'react-ga';
-const TRACKING_ID = "UA-251747573-2"; // OUR_TRACKING_ID
-ReactGA.initialize(TRACKING_ID);
+if (!process.env.NODE_ENV || process.env.NODE_ENV === 'development') {
+    // dev code
+} else {
+    // production code
+    const TRACKING_ID = "UA-251747573-2"; // OUR_TRACKING_ID
+    ReactGA.initialize(TRACKING_ID);
+}
 
 const App = () => {
     const currentUser  = {}
@@ -30,7 +35,7 @@ const App = () => {
     useEffect(() => {
         ReactGA.pageview(window.location.pathname + window.location.search);
       }, []);
-      
+
     useEffect(() => {
     }, [dispatch])
 
